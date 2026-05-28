@@ -31,7 +31,7 @@ const Dashboard = () => {
         <>
             <Box width="100dvw" height="100dvh" display="flex" flexDirection="column">
                 <Box display="flex" flexDirection="row" justifyContent="space-between" padding="10px">
-                    <MyDrawer namadrawer={nama} logodrawer={logo} />
+                    <MyDrawer namadrawer={nama} logodrawer={logo}/>
 
                     <Box display="flex" flexDirection="row" alignItems="center" gapX="10px">
                         <Text fontWeight="bold">My Inventory</Text>
@@ -39,6 +39,7 @@ const Dashboard = () => {
                             <CiSun />
                         </Button>
                     </Box>
+
                     <Button variant="outline" onClick={() => {handleLogOut()}}>
                         <BiLogOut />
                     </Button>

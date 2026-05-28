@@ -27,11 +27,12 @@ const Login = () => {
         const url = "http://localhost/inventarisweb/proseslogin.php";
         const body = { username: username, password: password };
         
+        
         try {
-            const response = await axios.post(url, body);
-            if(response.data.STATUS === "BERHASIL") {
-                localStorage.setItem("usernameLS", response.data.DATA[0]["username"]);
-                localStorage.setItem("namaLS", response.data.DATA[0]["nama"]);
+            const Response = await axios.post(url, body);
+            if(Response.data.STATUS === "BERHASIL") {
+                localStorage.setItem("usernameLS", Response.data.DATA[0]["username"]);
+                localStorage.setItem("namaLS", Response.data.DATA[0]["nama"]);
                 TampilPesan("Info", "Selamat Datang");
                 setTimeout(() => {
                     navigate("/dashboard");

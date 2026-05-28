@@ -8,10 +8,13 @@ const MyDrawer = ({ namadrawer, logodrawer }) => {
 
     return (
         <>
-            <Drawer.Root placement="start" open={open} onOpenChange={(e) => setOpen(e.open)}>
+            <Drawer.Root placement="start" 
+            open={open} 
+            onOpenChange={(e) => setOpen(e.open)}
+            >
                 <Drawer.Trigger asChild>
                     <Button variant="outline" size="sm">
-                        <BiMenu></BiMenu>
+                        <BiMenu />
                     </Button>
                 </Drawer.Trigger>
                 <Portal>
@@ -25,7 +28,6 @@ const MyDrawer = ({ namadrawer, logodrawer }) => {
                                     <Center>
                                         <Image src={logodrawer} width="30dvw" />
                                     </Center>
-
                                     <Box
                                         display="flex"
                                         flexDirection="column"
