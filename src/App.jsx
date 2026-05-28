@@ -14,6 +14,7 @@ const App = () => {
         <Route path="/dashboard" element={<Dashboard />}>
           <Route index element={<Home />} />
           <Route path="pengguna" element={<Pengguna />} />
+          <Route path="pengguna/tambah" element={<PenggunaCreate />} />
           <Route path="profil" element={<Profil />} />
         </Route>
       </Routes>

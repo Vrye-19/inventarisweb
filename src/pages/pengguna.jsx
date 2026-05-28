@@ -1,6 +1,7 @@
-import { Text } from "@chakra-ui/react";
+import { Box, Button, Heading, Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Pengguna = () => {
     const [user, setUser] = useState([]);
@@ -22,6 +23,14 @@ const Pengguna = () => {
 
     return (
         <>
+        <Heading size="xl" textAlign="center" padding="10px" >
+            Table Pengguna
+        </Heading>
+        <Box padding ="10px">
+            <Button as={Link} to="tambah" variant="solid" bgColor="teal" >
+                Tambah Pengguna
+            </Button>
+        </Box>
         <Table.Root>
             <Table.Header>
                 <Table.Row>
