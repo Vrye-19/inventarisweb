@@ -22,7 +22,26 @@ const Pengguna = () => {
 
     return (
         <>
-            <Text>Ini Halaman Pengguna</Text>
+        <Table.Root>
+            <Table.Header>
+                <Table.Row>
+                    <Table.ColumnHeader>No</Table.ColumnHeader>
+                    <Table.ColumnHeader>Nama</Table.ColumnHeader>
+                    <Table.ColumnHeader>Username</Table.ColumnHeader>
+                    <Table.ColumnHeader>Password</Table.ColumnHeader>
+                </Table.Row>
+            </Table.Header>
+            <Table.Body>
+                {user.map((item, index) => (
+                    <Table.Row Key={item.id}>
+                        <Table.Cell>{index + 1}</Table.Cell>
+                        <Table.Cell>{item.nama}</Table.Cell>
+                        <Table.Cell>{item.username}</Table.Cell>
+                        <Table.Cell>{item.password}</Table.Cell>
+                        </Table.Row>
+                ))}
+            </Table.Body> 
+        </Table.Root>
         </>
     );
 };
