@@ -12,10 +12,10 @@ const Home = () => {
                 alignItems="center"
             >
                 <Text fontSize="3xl" fontWeight="extrabold">
-                    Halo Selamat Datang
+                    Halo Selamat Datang!
                 </Text>
                 <Text fontSize="xl" fontWeight="bold">
-                    Ini adalah aplikasi sederhana ku
+                    Ini adalah aplikasi sederhana ku.
                 </Text>
             </Box>
         </>

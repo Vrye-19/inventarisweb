@@ -11,16 +11,16 @@ const Profil = () => {
 
     return (
         <>
-            <Heading size="2xl" textAlign="center">
+            <Heading size="2xl" textAlign="center" marginBottom={5}>
                 Profil Saya
             </Heading>
             <Box display="flex" flexDirection="row" justifyContent="center">
-                <Image src={person} width="30dvw" />
+                <Image src={person} width="10dvw" />
             </Box>
-            <Text fontWeight="bold" textAlign="center" padding="10px">
+            <Text fontWeight="bold" textAlign="center" marginTop={5}>
                 Nama Saya {nama}
             </Text>
-            <Text fontWeight="bold" textAlign="center" padding="10px">
+            <Text fontWeight="bold" textAlign="center">
                 Saya adalah seorang programmer junior yang suka belajar hal-hal baru mengenai bahasa pemrograman react. Bagi saya coding itu mirip sebuah game online.
             </Text>
         </>

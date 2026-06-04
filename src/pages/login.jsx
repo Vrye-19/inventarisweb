@@ -27,12 +27,11 @@ const Login = () => {
         const url = "http://localhost/inventarisweb/proseslogin.php";
         const body = { username: username, password: password };
         
-        
         try {
-            const Response = await axios.post(url, body);
-            if(Response.data.STATUS === "BERHASIL") {
-                localStorage.setItem("usernameLS", Response.data.DATA[0]["username"]);
-                localStorage.setItem("namaLS", Response.data.DATA[0]["nama"]);
+            const response = await axios.post(url, body);
+            if(response.data.STATUS === "BERHASIL") {
+                localStorage.setItem("usernameLS", response.data.DATA[0]["username"]);
+                localStorage.setItem("namaLS", response.data.DATA[0]["nama"]);
                 TampilPesan("Info", "Selamat Datang");
                 setTimeout(() => {
                     navigate("/dashboard");
@@ -42,7 +41,7 @@ const Login = () => {
                 TampilPesan("Info", "Username atau Password salah!");
             }
         } catch (error) {
-            console.log(error);
+            TampilPesan("Info", "Terjadi kesalahan");
         }
     }
 
@@ -77,8 +76,8 @@ const Login = () => {
                             <Text textAlign="center">My Inventory</Text>
                         </CardTitle>
                         <CardBody gapY="10px">
-                            <Input placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}></Input>
-                            <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
+                            <Input placeholder="Username" type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+                            <Input placeholder="Password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
                             <Button
                                 backgroundColor="teal"
                                 color="white"

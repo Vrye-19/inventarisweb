@@ -5,6 +5,7 @@ import Dashboard from "./pages/dashboard";
 import Home from "./pages/home";
 import Profil from "./pages/profil";
 import Pengguna from "./pages/pengguna";
+import PenggunaCreate from "./pages/penggunacreate";
 
 const App = () => {
   return (
