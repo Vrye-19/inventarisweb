@@ -52,9 +52,25 @@ const PenggunaCreate = () => {
                         </CardTitle>
                     </CardHeader>
                     <CardBody gapY="10px">
-                        <Input placeholder="Username" type="text" onChange={(e) => setUsername(e.target.value)} />
-                        <Input placeholder="Password" type="password" onChange={(e) => setPassword(e.target.value)} />
-                        <Input placeholder="Nama" type="text" onChange={(e) => setNama(e.target.value)} />
+                        <Input onChange={(e) => {
+                            setUsername(e.target.value);
+                        }}  
+                        placeholder="Username" 
+                        type="text" 
+                        />
+                        <Input 
+                        onChange={(e) => {
+                            setPassword(e.target.value);
+                        }}  
+                        placeholder="Password" 
+                        type="password"
+                        />
+                        <Input onChange={(e) => {
+                            setNama(e.target.value);
+                        }}  
+                        placeholder="Nama" 
+                        type="text" 
+                        />
                         <Button
                             backgroundColor="teal"
                             color="white"
