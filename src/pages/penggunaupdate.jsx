@@ -73,7 +73,7 @@ const PenggunaUpdate = () => {
                     </CardHeader>
                     <CardBody gapY="10px">
                         <Input onChange={(e) => {
-                            setNama(e.target.value);
+                            setUsername(e.target.value);
                         }} 
                         placeholder="Username" 
                         type="text" 
@@ -87,7 +87,7 @@ const PenggunaUpdate = () => {
                         value={password}  
                         />
                         <Input onChange={(e) => {
-                            setUsername(e.target.value);
+                            setNama(e.target.value);
                         }}
                         placeholder="Nama" 
                         type="text" 
