@@ -60,6 +60,19 @@ const MyDrawer = ({ namadrawer, logodrawer }) => {
                                         </Link>
                                         <Link
                                             as={RouterLink}
+                                            to="perangkat"
+                                            onClick={() => setOpen(false)}
+                                            bgColor="blue.100"
+                                            color="blackAlpha.800"
+                                            padding="10px"
+                                            _hover={{ backgroundColor: "blue.400", color: "white" }}
+                                            borderRadius="10px"
+                                            fontWeight="bold"
+                                        >
+                                            <Text>Menu Perangkat</Text>
+                                        </Link>
+                                        <Link
+                                            as={RouterLink}
                                             to="profil"
                                             onClick={() => setOpen(false)}
                                             bgColor="blue.100"
