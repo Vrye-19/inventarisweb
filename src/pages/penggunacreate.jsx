@@ -22,7 +22,7 @@ const PenggunaCreate = () => {
     const [nama, setNama] = useState("");
 
     const handleTambah = async () => {
-        const url = "http://localhost/inventarisweb/penggunainsert.php"
+        const url = "http://localhost/api/penggunainsert.php"
         const body = { username: username, password: password, nama: nama };
 
         try {

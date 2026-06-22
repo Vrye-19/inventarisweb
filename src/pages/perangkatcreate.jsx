@@ -27,7 +27,7 @@ const PerangkatCreate = () => {
     ];
 
     const tambahPerangkat = async () => {
-        const url = "http://localhost/inventarisweb/perangkatinsert.php";
+        const url = "http://localhost/api/perangkatinsert.php";
         const body = {nama_perangkat: namaPerangkat, jenis_perangkat: jenisPerangkat, posisi: posisi};
 
         if(namaPerangkat === "") {

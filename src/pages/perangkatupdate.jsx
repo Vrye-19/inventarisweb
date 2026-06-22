@@ -14,7 +14,7 @@ const PerangkatUpdate = () => {
 
     const { id } = useParams();
     const selectSatuPerangkat = async () => {
-        const url = `http://localhost/inventarisweb/satuperangkatread.php?id=${id}`;
+        const url = `http://localhost/api/satuperangkatread.php?id=${id}`;
 
         try {
             const res = await axios.get(url);
@@ -29,7 +29,7 @@ const PerangkatUpdate = () => {
     }
 
     const handleUpdate = async () => {
-        const url = "http://localhost/inventarisweb/perangkatupdate.php";
+        const url = "http://localhost/api/perangkatupdate.php";
         const body = { nama_perangkat: namaPerangkat, jenis_perangkat: jenisPerangkat, posisi: posisi, id: id };
 
         try {
