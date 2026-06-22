@@ -1,41 +1,39 @@
 import { Box, Button, Dialog, Heading, Portal, Table, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Toaster } from "../components/ui/toaster";
 import { TampilPesan } from "../components/ui/services";
 
 const Perangkat = () => {
-    const navigate = useNavigate();
-
-    const [user, setUser] = useState([]);
+    const [perangkat, setPerangkat] = useState([]);
 
     const selectPerangkat = async () => {
         const url = "http://localhost/inventarisweb/perangkatread.php";
+
         try {
             const res = await axios.get(url);
-            setUser(res.data["DATA"]);
+            setPerangkat(res.data['DATA'])
         } catch (error) {
-            TampilPesan("Info", "Terjadi kesalahan.");
-
+            TampilPesan("Info", "Terjadi Kesalahan");
         }
     }
 
     const handleHapus = async (id) => {
         const url = "http://localhost/inventarisweb/perangkatdelete.php";
-        const body = { id: id };
+        const body = { id: id};
 
         try {
             const res = await axios.post(url, body);
 
             if(res.data.STATUS === "BERHASIL") {
                 await selectPerangkat();
-                TampilPesan("Info", "Data berhasil dihapus!");
+                TampilPesan("Info", "Perangkat berhasil dihapus!");
             } else {
-                TampilPesan("Info", "Gagal menghapus data!");
+                TampilPesan("Info", "Gagal menghapus perangkat!");
             }
         } catch (error) {
-            TampilPesan("Info", "Terjadi kesalahan.");
+            TampilPesan("Info", "Terjadi Kesalahan");
         }
     }
 
@@ -58,19 +56,19 @@ const Perangkat = () => {
                 <Table.Header>
                     <Table.Row>
                         <Table.ColumnHeader>No</Table.ColumnHeader>
-                        <Table.ColumnHeader>Nama Perangkat</Table.ColumnHeader>
-                        <Table.ColumnHeader>Jenis Perangkat</Table.ColumnHeader>
+                        <Table.ColumnHeader>Nama</Table.ColumnHeader>
+                        <Table.ColumnHeader>Jenis</Table.ColumnHeader>
                         <Table.ColumnHeader>Posisi</Table.ColumnHeader>
                         <Table.ColumnHeader>Actions</Table.ColumnHeader>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {user.map((item, index) => (
+                    {perangkat.map((item, index) => (
                         <Table.Row key={item.id}>
                             <Table.Cell>{index + 1}</Table.Cell>
                             <Table.Cell>{item.nama_perangkat}</Table.Cell>
                             <Table.Cell>{item.jenis_perangkat}</Table.Cell>
-                            <Table.Cell>{item.Posisi}</Table.Cell>
+                            <Table.Cell>{item.posisi}</Table.Cell>
                             <Table.Cell>
                                 <Button
                                     as={Link}
@@ -78,13 +76,15 @@ const Perangkat = () => {
                                     margin="2px"
                                     bgColor="blue.400"
                                 >
-                                    Ubah
+                                    <Text>Ubah</Text>
                                 </Button>
                                 <Dialog.Root>
                                     <Dialog.Trigger asChild>
                                         <Button
-                                            margin="2px" bgColor="red.400">
-                                            Hapus
+                                            margin="2px"
+                                            bgColor="red.400"
+                                        >
+                                            <Text>Hapus</Text>
                                         </Button>
                                     </Dialog.Trigger>
                                     <Portal>
@@ -101,13 +101,11 @@ const Perangkat = () => {
                                                     </Dialog.Body>
                                                     <Dialog.Footer>
                                                         <Dialog.ActionTrigger asChild>
-                                                            <Button variant="outline">Hapus</Button>
+                                                            <Button variant="outline">Batal</Button>
                                                         </Dialog.ActionTrigger>
                                                         <Button
                                                             bgColor="red.500"
-                                                            onClick={() => {
-                                                                handleHapus(item.id);
-                                                            }}
+                                                            onClick={() => handleHapus(item.id)}
                                                         >
                                                             Hapus
                                                         </Button>
@@ -124,6 +122,6 @@ const Perangkat = () => {
             </Table.Root>
         </>
     );
-};
+}
 
 export default Perangkat;

@@ -33,13 +33,19 @@ const Dashboard = () => {
                 <Box display="flex" flexDirection="row" justifyContent="space-between" padding="10px">
                     <MyDrawer namadrawer={nama} logodrawer={logo} />
 
-                    <Box display="flex" flexDirection="row" alignItems="center" gapX="10px">
+                    <Box display="flex" 
+                    flexDirection="row" 
+                    alignItems="center" 
+                    gapX="10px">
                         <Text fontWeight="bold">My Inventory</Text>
                         <Button variant="outline" onClick={toggleColorMode}>
                             <CiSun />
                         </Button>
                     </Box>
-                    <Button variant="outline" onClick={() => {handleLogOut()}}>
+                    <Button variant="outline" 
+                    onClick={() => {
+                        handleLogOut()
+                    }}>
                         <BiLogOut />
                     </Button>
                 </Box>

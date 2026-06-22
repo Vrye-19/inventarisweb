@@ -1,4 +1,13 @@
-import { Box, Button, Card, CardBody, CardHeader, CardTitle, Input, Text } from "@chakra-ui/react";
+import { 
+    Box, 
+    Button, 
+    Card, 
+    CardBody, 
+    CardHeader, 
+    CardTitle,
+    Heading, 
+    Input, 
+    Text } from "@chakra-ui/react";
 import axios from "axios";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -42,10 +51,7 @@ const PenggunaCreate = () => {
             >
                 <Toaster />
                 <Card.Root
-                    width="50dvw"
-                    shadowColor="bg.emphasized"
-                    shadow="lg"
-                >
+                    width="50dvw" shadowColor="bg.emphasized" shadow="lg">
                     <CardHeader>
                         <CardTitle>
                             <Text>Form Tambah Pengguna</Text>

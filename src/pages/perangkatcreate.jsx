@@ -1,10 +1,9 @@
-import { Box, Button, Card, CardBody, CardHeader, CardTitle, Input, Text } from "@chakra-ui/react";
-import axios from "axios";
+import { Box, Button, Card, CardBody, CardHeader, CardTitle, Input, NativeSelect, Text } from "@chakra-ui/react";
+import { Toaster } from "../components/ui/toaster";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Toaster } from "../components/ui/toaster";
 import { TampilPesan } from "../components/ui/services";
-
+import axios from "axios";
 
 const PerangkatCreate = () => {
     const navigate = useNavigate();
@@ -12,23 +11,52 @@ const PerangkatCreate = () => {
     const [namaPerangkat, setNamaPerangkat] = useState("");
     const [jenisPerangkat, setJenisPerangkat] = useState("");
     const [posisi, setPosisi] = useState("");
-    
 
-    const handleTambah = async () => {
-        const url = "http://localhost/inventarisweb/perangkatinsert.php"
-        const body = { namaPerangkat: namaPerangkat, jenisPerangkat: jenisPerangkat, posisi: posisi };
+    const jenisOptions = [
+        {label: "MOUSE", value: "MOUSE"},
+        {label: "KEYBOARD", value: "KEYBOARD"},
+        {label: "CPU", value: "CPU"},
+        {label: "MONITOR", value: "MONITOR"}
+    ];
 
+    const posisiOptions = [
+        {label: "LAB A", value: "LAB A"},
+        {label: "LAB B", value: "LAB B"},
+        {label: "LAB C", value: "LAB C"},
+        {label: "LAB D", value: "LAB D"}
+    ];
+
+    const tambahPerangkat = async () => {
+        const url = "http://localhost/inventarisweb/perangkatinsert.php";
+        const body = {nama_perangkat: namaPerangkat, jenis_perangkat: jenisPerangkat, posisi: posisi};
+
+        if(namaPerangkat === "") {
+            TampilPesan("Info", "Nama perangkat tidak boleh kosong.");
+            return;
+        }
+
+        if(jenisPerangkat <= 0) {
+            TampilPesan("Info", "Jenis perangkat tidak boleh kosong.");
+            return;
+        }
+
+        if(posisi <= 0) {
+            TampilPesan("Info", "Posisi tidak boleh kosong.");
+            return;
+        }
+ 
         try {
             const res = await axios.post(url, body);
+
             if(res.data.STATUS === "BERHASIL") {
                 navigate("/dashboard/perangkat");
                 TampilPesan("Info", "Perangkat berhasil ditambahkan!");
             } else {
                 navigate("/dashboard/perangkat/tambah");
-                TampilPesan("Info", "Gagal menambahkan Perangkat!");
+                TampilPesan("Info", "Gagal menambahkan perangkat!");
             }
         } catch (error) {
-            TampilPesan("Info", "Terjadi kesalahan.");
+            TampilPesan("Info", "Terjadi Kesalahan");
         }
     }
 
@@ -54,31 +82,27 @@ const PerangkatCreate = () => {
                         </CardTitle>
                     </CardHeader>
                     <CardBody gapY="10px">
-                        <Input onChange={(e) => {
-                            setNamaPerangkat(e.target.value);
-                        }}  
-                        placeholder="Nama Perangkat" 
-                        type="text" 
-                        />
-                        <Input 
-                    
-                        onChange={(e) => {
-                            setJenisPerangkat(e.target.value);
-                        }}  
-                        placeholder="Jenis Perangkat" 
-                        type="select"
-                        />        
-                        <Input onChange={(e) => {
-                            setPosisi(e.target.value);
-                        }}  
-                        placeholder="Posisi" 
-                        type="text" 
-                        />
+                        <Input placeholder="Nama Perangkat" type="text" onChange={(e) => setNamaPerangkat(e.target.value)}></Input>
+                        <NativeSelect.Root>
+                            <NativeSelect.Field placeholder="Pilih Jenis Perangkat" onChange={(e) => setJenisPerangkat(e.target.value)}>
+                                {jenisOptions.map((item, index) => (
+                                    <option key={index} value={item.value}>{item.label}</option>
+                                ))}
+                            </NativeSelect.Field>
+                        </NativeSelect.Root>
+                        <NativeSelect.Root>
+                            <NativeSelect.Field placeholder="Pilih Posisi" onChange={(e) => setPosisi(e.target.value)}>
+                                {posisiOptions.map((item, index) => (
+                                    <option key={index} value={item.value}>{item.label}</option>
+                                ))}
+                            </NativeSelect.Field>
+                        </NativeSelect.Root>
+
                         <Button
                             backgroundColor="teal"
                             color="white"
                             borderRadius="10px"
-                            onClick={() => handleTambah()}
+                            onClick={() => tambahPerangkat()}
                         >
                             <Text>Tambah Perangkat</Text>
                         </Button>

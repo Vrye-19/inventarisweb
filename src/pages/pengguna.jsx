@@ -1,33 +1,39 @@
-import { Box, Button, Dialog, Heading, Portal, Table, Text } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { 
+    Box, 
+    Button, 
+    Dialog, 
+    Heading, 
+    Portal, 
+    Table, 
+    Text,
+    createListCollection 
+} from "@chakra-ui/react";
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Toaster } from "../components/ui/toaster";
 import { TampilPesan } from "../components/ui/services";
 
 const Pengguna = () => {
     const navigate = useNavigate();
-
-    const [user, setUser] = useState([]);
-
+     
     const selectPengguna = async () => {
         const url = "http://localhost/inventarisweb/penggunaread.php";
         try {
             const res = await axios.get(url);
             setUser(res.data["DATA"]);
         } catch (error) {
-            TampilPesan("Info", "Terjadi kesalahan.");
-
+            TampilPesan("Info", "Terjadi kesalahan.");           
         }
     }
-
+    
     const handleHapus = async (id) => {
         const url = "http://localhost/inventarisweb/penggunadelete.php";
         const body = { id: id };
-
+        
         try {
             const res = await axios.post(url, body);
-
+            
             if(res.data.STATUS === "BERHASIL") {
                 await selectPengguna();
                 TampilPesan("Info", "Data berhasil dihapus!");
@@ -38,6 +44,8 @@ const Pengguna = () => {
             TampilPesan("Info", "Terjadi kesalahan.");
         }
     }
+
+    const [user, setUser] = useState([]);
 
     useEffect(() => {
         selectPengguna();
