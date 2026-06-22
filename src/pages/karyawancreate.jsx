@@ -32,21 +32,6 @@ const KaryawanCreate = () => {
             return;
         }
 
-        if(jabatanKaryawan === "") {
-            TampilPesan("Info", "Jabatan karyawan tidak boleh kosong.");
-            return;
-        }
-
-        if(posisiKaryawan === "") {
-            TampilPesan("Info", "Posisi karyawan tidak boleh kosong.");
-            return;
-        }
-
-        if(namaKaryawan <= 0) {
-            TampilPesan("Info", "Nama karyawan tidak boleh kosong.");
-            return;
-        }
-
         if(jabatanKaryawan <= 0) {
             TampilPesan("Info", "Jabatan karyawan tidak boleh kosong.");
             return;

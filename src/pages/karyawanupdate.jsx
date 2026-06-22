@@ -30,7 +30,7 @@ const KaryawanUpdate = () => {
 
     const handleUpdate = async () => {
         const url = "http://localhost:8080/api/updatekaryawan.php";
-        const body = { namaKaryawan: namaKaryawan, jabatanKaryawan: jabatanKaryawan, posisiKaryawan: posisiKaryawan, idKaryawan: idKaryawan };
+        const body = { namaKaryawan: namaKaryawan, jabatqanKaryawan: jabatanKaryawan, posisiKaryawan: posisiKaryawan, id: id };
 
         try {
             const res = await axios.post(url, body);

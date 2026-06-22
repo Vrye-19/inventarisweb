@@ -21,7 +21,7 @@ const Karyawan = () => {
 
     const handleHapus = async (id) => {
         const url = "http://localhost:8080/api/deletekaryawan.php";
-        const body = { idKaryawan: idKaryawan};
+        const body = { id: id};
 
         try {
             const res = await axios.post(url, body);
@@ -64,7 +64,7 @@ const Karyawan = () => {
                 </Table.Header>
                 <Table.Body>
                     {karyawan.map((item, index) => (
-                        <Table.Row key={item.idKaryawan}>
+                        <Table.Row key={item.id}>
                             <Table.Cell>{index + 1}</Table.Cell>
                             <Table.Cell>{item.namaKaryawan}</Table.Cell>
                             <Table.Cell>{item.jabatanKaryawan}</Table.Cell>
@@ -72,7 +72,7 @@ const Karyawan = () => {
                             <Table.Cell>
                                 <Button
                                     as={Link}
-                                    to={`update/${item.idKaryawan}`}
+                                    to={`update/${item.id}`}
                                     margin="2px"
                                     bgColor="blue.400"
                                 >
@@ -105,7 +105,7 @@ const Karyawan = () => {
                                                         </Dialog.ActionTrigger>
                                                         <Button
                                                             bgColor="red.500"
-                                                            onClick={() => handleHapus(item.idKaryawan)}
+                                                            onClick={() => handleHapus(item.id)}
                                                         >
                                                             Hapus
                                                         </Button>
