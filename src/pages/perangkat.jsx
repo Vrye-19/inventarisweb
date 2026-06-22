@@ -9,7 +9,7 @@ const Perangkat = () => {
     const [perangkat, setPerangkat] = useState([]);
 
     const selectPerangkat = async () => {
-        const url = "http://localhost:8080/api/perangkatread.php";
+        const url = "http://localhost/api/perangkatread.php";
 
         try {
             const res = await axios.get(url);
@@ -20,7 +20,7 @@ const Perangkat = () => {
     }
 
     const handleHapus = async (id) => {
-        const url = "http://localhost:8080/api/perangkatdelete.php";
+        const url = "http://localhost/api/perangkatdelete.php";
         const body = { id: id};
 
         try {

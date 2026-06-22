@@ -25,7 +25,7 @@ const PenggunaUpdate = () => {
     console.log(id)
 
     const selectSatuPengguna = async () => {
-        const url = `http://localhost:8080/api/satupenggunaread.php?id=${id}`;
+        const url = `http://localhost/api/satupenggunaread.php?id=${id}`;
 
         try {
             const res = await axios.get(url);
@@ -38,7 +38,7 @@ const PenggunaUpdate = () => {
     }
 
     const handleUpdate = async () => {
-        const url = "http://localhost:8080/api/penggunaupdate.php";
+        const url = "http://localhost/api/penggunaupdate.php";
         const body = { username: username, password: password, nama: nama, id: id };
 
         try {

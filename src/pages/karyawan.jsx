@@ -9,7 +9,7 @@ const Karyawan = () => {
     const [karyawan, setKaryawan] = useState([]);
 
     const selectKaryawan = async () => {
-        const url = "http://localhost:8080/api/readkaryawan.php";
+        const url = "http://localhost/api/readkaryawan.php";
 
         try {
             const res = await axios.get(url);
@@ -19,9 +19,9 @@ const Karyawan = () => {
         }
     }
 
-    const handleHapus = async (id) => {
-        const url = "http://localhost:8080/api/deletekaryawan.php";
-        const body = { id: id};
+    const handleHapus = async (idKaryawan) => {
+        const url = "http://localhost/api/deletekaryawan.php";
+        const body = { idKaryawan: idKaryawan };
 
         try {
             const res = await axios.post(url, body);
@@ -64,7 +64,7 @@ const Karyawan = () => {
                 </Table.Header>
                 <Table.Body>
                     {karyawan.map((item, index) => (
-                        <Table.Row key={item.id}>
+                        <Table.Row key={item.idKaryawan}>
                             <Table.Cell>{index + 1}</Table.Cell>
                             <Table.Cell>{item.namaKaryawan}</Table.Cell>
                             <Table.Cell>{item.jabatanKaryawan}</Table.Cell>
@@ -72,7 +72,7 @@ const Karyawan = () => {
                             <Table.Cell>
                                 <Button
                                     as={Link}
-                                    to={`update/${item.id}`}
+                                    to={`update/${item.idKaryawan}`}
                                     margin="2px"
                                     bgColor="blue.400"
                                 >
@@ -105,7 +105,7 @@ const Karyawan = () => {
                                                         </Dialog.ActionTrigger>
                                                         <Button
                                                             bgColor="red.500"
-                                                            onClick={() => handleHapus(item.id)}
+                                                            onClick={() => handleHapus(item.idKaryawan)}
                                                         >
                                                             Hapus
                                                         </Button>

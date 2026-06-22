@@ -12,9 +12,9 @@ const KaryawanUpdate = () => {
     const [jabatanKaryawan, setJabatanKaryawan] = useState("");
     const [posisiKaryawan, setPosisiKaryawan] = useState("");
 
-    const { id } = useParams();
+    const { idKaryawan } = useParams();
     const selectSatuKaryawan = async () => {
-        const url = `http://localhost:8080/api/satukaryawanread.php?id=${id}`;
+        const url = `http://localhost/api/satukaryawanread.php?idKaryawan=${idKaryawan}`;
 
         try {
             const res = await axios.get(url);
@@ -29,8 +29,8 @@ const KaryawanUpdate = () => {
     }
 
     const handleUpdate = async () => {
-        const url = "http://localhost:8080/api/updatekaryawan.php";
-        const body = { namaKaryawan: namaKaryawan, jabatqanKaryawan: jabatanKaryawan, posisiKaryawan: posisiKaryawan, id: id };
+        const url = "http://localhost/api/updatekaryawan.php";
+        const body = { namaKaryawan: namaKaryawan, jabatqanKaryawan: jabatanKaryawan, posisiKaryawan: posisiKaryawan, idKaryawan: idKaryawan };
 
         try {
             const res = await axios.post(url, body);

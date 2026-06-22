@@ -24,7 +24,7 @@ const KaryawanCreate = () => {
     ];
 
     const tambahKaryawan = async () => {
-        const url = "http://localhost:8080/api/insertkaryawan.php";
+        const url = "http://localhost/api/insertkaryawan.php";
         const body = { namakaryawan: namaKaryawan, jabatan: jabatanKaryawan, posisiKaryawan: posisiKaryawan};
 
         if(namaKaryawan === "") {
