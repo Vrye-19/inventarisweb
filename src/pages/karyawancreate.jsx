@@ -5,43 +5,55 @@ import { Link, useNavigate } from "react-router-dom";
 import { TampilPesan } from "../components/ui/services";
 import axios from "axios";
 
-const PerangkatCreate = () => {
+const KaryawanCreate = () => {
     const navigate = useNavigate();
 
-    const [namaPerangkat, setNamaPerangkat] = useState("");
-    const [jenisPerangkat, setJenisPerangkat] = useState("");
-    const [posisi, setPosisi] = useState("");
+    const [namaKaryawan, setNamaKaryawan] = useState("");
+    const [jabatanKaryawan, setJabatanKaryawan] = useState("");
+    const [posisiKaryawan, setPosisiKaryawan] = useState("");
 
-    const jenisOptions = [
-        {label: "MOUSE", value: "MOUSE"},
-        {label: "KEYBOARD", value: "KEYBOARD"},
-        {label: "CPU", value: "CPU"},
-        {label: "MONITOR", value: "MONITOR"}
+    const jabatanOptions = [
+        {label: "CEO", value: "CEO"},
+        {label: "DIREKTUR", value: "DIREKTUR"}
     ];
 
     const posisiOptions = [
-        {label: "LAB A", value: "LAB A"},
-        {label: "LAB B", value: "LAB B"},
-        {label: "LAB C", value: "LAB C"},
-        {label: "LAB D", value: "LAB D"}
+        {label: "GEMINI", value: "GEMINI"},
+        {label: "SCORPIO", value: "SCORPIO"},
+        {label: "TAURUS", value: "TAURUS"}
     ];
 
-    const tambahPerangkat = async () => {
-        const url = "http://localhost:8080/api/perangkatinsert.php";
-        const body = {nama_perangkat: namaPerangkat, jenis_perangkat: jenisPerangkat, posisi: posisi};
+    const tambahKaryawan = async () => {
+        const url = "http://localhost:8080/api/insertkaryawan.php";
+        const body = { namakaryawan: namaKaryawan, jabatan: jabatanKaryawan, posisiKaryawan: posisiKaryawan};
 
-        if(namaPerangkat === "") {
-            TampilPesan("Info", "Nama perangkat tidak boleh kosong.");
+        if(namaKaryawan === "") {
+            TampilPesan("Info", "Nama karyawan tidak boleh kosong.");
             return;
         }
 
-        if(jenisPerangkat <= 0) {
-            TampilPesan("Info", "Jenis perangkat tidak boleh kosong.");
+        if(jabatanKaryawan === "") {
+            TampilPesan("Info", "Jabatan karyawan tidak boleh kosong.");
             return;
         }
 
-        if(posisi <= 0) {
-            TampilPesan("Info", "Posisi tidak boleh kosong.");
+        if(posisiKaryawan === "") {
+            TampilPesan("Info", "Posisi karyawan tidak boleh kosong.");
+            return;
+        }
+
+        if(namaKaryawan <= 0) {
+            TampilPesan("Info", "Nama karyawan tidak boleh kosong.");
+            return;
+        }
+
+        if(jabatanKaryawan <= 0) {
+            TampilPesan("Info", "Jabatan karyawan tidak boleh kosong.");
+            return;
+        }
+
+        if(posisiKaryawan <= 0) {
+            TampilPesan("Info", "Posisi karyawan tidak boleh kosong.");
             return;
         }
  
@@ -49,11 +61,11 @@ const PerangkatCreate = () => {
             const res = await axios.post(url, body);
 
             if(res.data.STATUS === "BERHASIL") {
-                navigate("/dashboard/perangkat");
-                TampilPesan("Info", "Perangkat berhasil ditambahkan!");
+                navigate("/dashboard/karyawan");
+                TampilPesan("Info", "Karyawan berhasil ditambahkan!");
             } else {
-                navigate("/dashboard/perangkat/tambah");
-                TampilPesan("Info", "Gagal menambahkan perangkat!");
+                navigate("/dashboard/karyawan/tambah");
+                TampilPesan("Info", "Gagal menambahkan karyawan!");
             }
         } catch (error) {
             TampilPesan("Info", "Terjadi Kesalahan");
@@ -78,20 +90,20 @@ const PerangkatCreate = () => {
                 >
                     <CardHeader>
                         <CardTitle>
-                            <Text>Form Tambah Perangkat</Text>
+                            <Text>Form Tambah Karyawan</Text>
                         </CardTitle>
                     </CardHeader>
                     <CardBody gapY="10px">
-                        <Input placeholder="Nama Perangkat" type="text" onChange={(e) => setNamaPerangkat(e.target.value)}></Input>
+                        <Input placeholder="Nama Karyawan" type="text" onChange={(e) => setNamaKaryawan(e.target.value)}></Input>
                         <NativeSelect.Root>
-                            <NativeSelect.Field placeholder="Pilih Jenis Perangkat" onChange={(e) => setJenisPerangkat(e.target.value)}>
-                                {jenisOptions.map((item, index) => (
+                            <NativeSelect.Field placeholder="Pilih Jabatan" onChange={(e) => setJabatanKaryawan(e.target.value)}>
+                                {jabatanOptions.map((item, index) => (
                                     <option key={index} value={item.value}>{item.label}</option>
                                 ))}
                             </NativeSelect.Field>
                         </NativeSelect.Root>
                         <NativeSelect.Root>
-                            <NativeSelect.Field placeholder="Pilih Posisi" onChange={(e) => setPosisi(e.target.value)}>
+                            <NativeSelect.Field placeholder="Pilih Posisi" onChange={(e) => setPosisiKaryawan(e.target.value)}>
                                 {posisiOptions.map((item, index) => (
                                     <option key={index} value={item.value}>{item.label}</option>
                                 ))}
@@ -102,13 +114,13 @@ const PerangkatCreate = () => {
                             backgroundColor="teal"
                             color="white"
                             borderRadius="10px"
-                            onClick={() => tambahPerangkat()}
+                            onClick={() => tambahKaryawan()}
                         >
-                            <Text>Tambah Perangkat</Text>
+                            <Text>Tambah Karyawan</Text>
                         </Button>
                         <Button
                             as={Link}
-                            to="/dashboard/perangkat"
+                            to="/dashboard/karyawan"
                             borderRadius="10px"
                             variant="outline"
                         >
@@ -121,4 +133,4 @@ const PerangkatCreate = () => {
     );
 }
 
-export default PerangkatCreate;
+export default KaryawanCreate;

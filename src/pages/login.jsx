@@ -24,7 +24,7 @@ const Login = () => {
     const [password, setPassword] = useState("");
 
     const handleLogin = async () => {
-        const url = "http://localhost/api/proseslogin.php";
+        const url = "http://localhost:8080/api/proseslogin.php";
         const body = { username: username, password: password };
         
         try {

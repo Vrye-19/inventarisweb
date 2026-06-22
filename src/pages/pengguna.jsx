@@ -18,7 +18,7 @@ const Pengguna = () => {
     const navigate = useNavigate();
      
     const selectPengguna = async () => {
-        const url = "http://localhost/api/penggunaread.php";
+        const url = "http://localhost:8080/api/penggunaread.php";
         try {
             const res = await axios.get(url);
             setUser(res.data["DATA"]);
@@ -28,7 +28,7 @@ const Pengguna = () => {
     }
     
     const handleHapus = async (id) => {
-        const url = "http://localhost/api/penggunadelete.php";
+        const url = "http://localhost:8080/api/penggunadelete.php";
         const body = { id: id };
         
         try {

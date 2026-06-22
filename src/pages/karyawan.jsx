@@ -5,32 +5,32 @@ import { Link } from "react-router-dom";
 import { Toaster } from "../components/ui/toaster";
 import { TampilPesan } from "../components/ui/services";
 
-const Perangkat = () => {
-    const [perangkat, setPerangkat] = useState([]);
+const Karyawan = () => {
+    const [karyawan, setKaryawan] = useState([]);
 
-    const selectPerangkat = async () => {
-        const url = "http://localhost:8080/api/perangkatread.php";
+    const selectKaryawan = async () => {
+        const url = "http://localhost:8080/api/readkaryawan.php";
 
         try {
             const res = await axios.get(url);
-            setPerangkat(res.data['DATA'])
+            setKaryawan(res.data['DATA'])
         } catch (error) {
             TampilPesan("Info", "Terjadi Kesalahan");
         }
     }
 
     const handleHapus = async (id) => {
-        const url = "http://localhost:8080/api/perangkatdelete.php";
-        const body = { id: id};
+        const url = "http://localhost:8080/api/deletekaryawan.php";
+        const body = { idKaryawan: idKaryawan};
 
         try {
             const res = await axios.post(url, body);
 
             if(res.data.STATUS === "BERHASIL") {
-                await selectPerangkat();
-                TampilPesan("Info", "Perangkat berhasil dihapus!");
+                await selectKaryawan();
+                TampilPesan("Info", "Karyawan berhasil dihapus!");
             } else {
-                TampilPesan("Info", "Gagal menghapus perangkat!");
+                TampilPesan("Info", "Gagal menghapus karyawan!");
             }
         } catch (error) {
             TampilPesan("Info", "Terjadi Kesalahan");
@@ -38,18 +38,18 @@ const Perangkat = () => {
     }
 
     useEffect(() => {
-        selectPerangkat();
+        selectKaryawan();
     }, []);
 
     return (
         <>
             <Toaster />
             <Heading size="xl" textAlign="center" padding="10px">
-                Tabel Perangkat
+                Tabel Karyawan
             </Heading>
             <Box padding="10px">
                 <Button as={Link} to="tambah" variant="solid" bgColor="teal">
-                    Tambah Perangkat
+                    Tambah Karyawan
                 </Button>
             </Box>
             <Table.Root>
@@ -57,22 +57,22 @@ const Perangkat = () => {
                     <Table.Row>
                         <Table.ColumnHeader>No</Table.ColumnHeader>
                         <Table.ColumnHeader>Nama</Table.ColumnHeader>
-                        <Table.ColumnHeader>Jenis</Table.ColumnHeader>
+                        <Table.ColumnHeader>Jabatan</Table.ColumnHeader>
                         <Table.ColumnHeader>Posisi</Table.ColumnHeader>
                         <Table.ColumnHeader>Actions</Table.ColumnHeader>
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {perangkat.map((item, index) => (
-                        <Table.Row key={item.id}>
+                    {karyawan.map((item, index) => (
+                        <Table.Row key={item.idKaryawan}>
                             <Table.Cell>{index + 1}</Table.Cell>
-                            <Table.Cell>{item.nama_perangkat}</Table.Cell>
-                            <Table.Cell>{item.jenis_perangkat}</Table.Cell>
-                            <Table.Cell>{item.posisi}</Table.Cell>
+                            <Table.Cell>{item.namaKaryawan}</Table.Cell>
+                            <Table.Cell>{item.jabatanKaryawan}</Table.Cell>
+                            <Table.Cell>{item.posisiKaryawan}</Table.Cell>
                             <Table.Cell>
                                 <Button
                                     as={Link}
-                                    to={`update/${item.id}`}
+                                    to={`update/${item.idKaryawan}`}
                                     margin="2px"
                                     bgColor="blue.400"
                                 >
@@ -96,7 +96,7 @@ const Perangkat = () => {
                                                     </Dialog.Header>
                                                     <Dialog.Body>
                                                         <Text>
-                                                            Apakah anda yakin hapus data {item.nama_perangkat} ?
+                                                            Apakah anda yakin hapus data {item.namaKaryawan} ?
                                                         </Text>
                                                     </Dialog.Body>
                                                     <Dialog.Footer>
@@ -105,7 +105,7 @@ const Perangkat = () => {
                                                         </Dialog.ActionTrigger>
                                                         <Button
                                                             bgColor="red.500"
-                                                            onClick={() => handleHapus(item.id)}
+                                                            onClick={() => handleHapus(item.idKaryawan)}
                                                         >
                                                             Hapus
                                                         </Button>
@@ -124,4 +124,4 @@ const Perangkat = () => {
     );
 }
 
-export default Perangkat;
+export default Karyawan;

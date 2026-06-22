@@ -5,23 +5,23 @@ import { TampilPesan } from "../components/ui/services";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-const PerangkatUpdate = () => {
+const KaryawanUpdate = () => {
     const navigate = useNavigate();
 
-    const [namaPerangkat, setNamaPerangkat] = useState("");
-    const [jenisPerangkat, setJenisPerangkat] = useState("");
-    const [posisi, setPosisi] = useState("");
+    const [namaKaryawan, setNamaKaryawan] = useState("");
+    const [jabatanKaryawan, setJabatanKaryawan] = useState("");
+    const [posisiKaryawan, setPosisiKaryawan] = useState("");
 
     const { id } = useParams();
-    const selectSatuPerangkat = async () => {
-        const url = `http://localhost:8080/api/satuperangkatread.php?id=${id}`;
+    const selectSatuKaryawan = async () => {
+        const url = `http://localhost:8080/api/satukaryawanread.php?id=${id}`;
 
         try {
             const res = await axios.get(url);
             const data = res.data["DATA"][0];
-            setNamaPerangkat(data["nama_perangkat"]);
-            setJenisPerangkat(data["jenis_perangkat"]);
-            setPosisi(data["posisi"]);
+            setNamaKaryawan(data["namaKaryawan"]);
+            setJabatanKaryawan(data["jabatanKaryawan"]);
+            setPosisiKaryawan(data["posisiKaryawan"]);
         } catch (error) {
             console.log(error);
             TampilPesan("Info", "Gagal mengambil data!");
@@ -29,40 +29,37 @@ const PerangkatUpdate = () => {
     }
 
     const handleUpdate = async () => {
-        const url = "http://localhost:8080/api/perangkatupdate.php";
-        const body = { nama_perangkat: namaPerangkat, jenis_perangkat: jenisPerangkat, posisi: posisi, id: id };
+        const url = "http://localhost:8080/api/updatekaryawan.php";
+        const body = { namaKaryawan: namaKaryawan, jabatanKaryawan: jabatanKaryawan, posisiKaryawan: posisiKaryawan, idKaryawan: idKaryawan };
 
         try {
             const res = await axios.post(url, body);
 
             if(res.data.STATUS === "BERHASIL") {
-                navigate("/dashboard/perangkat");
-                TampilPesan("Info", "Perangkat berhasil diupdate!");
+                navigate("/dashboard/karyawan");
+                TampilPesan("Info", "Karyawan berhasil diupdate!");
             } else {
-                navigate("/dashboard/perangkat/update");
-                TampilPesan("Info", "Gagal mengupdate perangkat!");
+                navigate("/dashboard/karyawan/update");
+                TampilPesan("Info", "Gagal mengupdate karyawan!");
             }
         } catch (error) {
             TampilPesan("Info", "Terjadi Kesalahan.");
         }
     }
 
-    const jenisOptions = [
-        {label: "MOUSE", value: "MOUSE"},
-        {label: "KEYBOARD", value: "KEYBOARD"},
-        {label: "CPU", value: "CPU"},
-        {label: "MONITOR", value: "MONITOR"}
+    const jabatanOptions = [
+        {label: "CEO", value: "CEO"},
+        {label: "DIREKTUR", value: "DIREKTUR"}
     ];
 
     const posisiOptions = [
-        {label: "LAB A", value: "LAB A"},
-        {label: "LAB B", value: "LAB B"},
-        {label: "LAB C", value: "LAB C"},
-        {label: "LAB D", value: "LAB D"}
+        {label: "GEMINI", value: "GEMINI"},
+        {label: "SCORPIO", value: "SCORPIO"},
+        {label: "TAURUS", value: "TAURUS"}
     ];
 
     useEffect(() => {
-        selectSatuPerangkat();
+        selectSatuKaryawan();
     }, []);
 
     return (
@@ -83,20 +80,20 @@ const PerangkatUpdate = () => {
                 >
                     <CardHeader>
                         <CardTitle>
-                            <Text>Form Ubah Perangkat</Text>
+                            <Text>Form Ubah Karyawan</Text>
                         </CardTitle>
                     </CardHeader>
                     <CardBody gapY="10px">
-                        <Input placeholder="Nama Perangkat" type="text" value={namaPerangkat} onChange={(e) => setNamaPerangkat(e.target.value)}></Input>
+                        <Input placeholder="Nama Karyawan" type="text" value={namaKaryawan} onChange={(e) => setNamaKaryawan(e.target.value)}></Input>
                         <NativeSelect.Root>
-                            <NativeSelect.Field placeholder="Pilih Jenis Perangkat" value={jenisPerangkat} onChange={(e) => setJenisPerangkat(e.target.value)}>
-                                {jenisOptions.map((item, index) => (
+                            <NativeSelect.Field placeholder="Pilih Jabatan" value={jabatanKaryawan} onChange={(e) => setJabatanKaryawan(e.target.value)}>
+                                {jabatanOptions.map((item, index) => (
                                     <option key={index} value={item.value}>{item.label}</option>
                                 ))}
                             </NativeSelect.Field>
                         </NativeSelect.Root>
                         <NativeSelect.Root>
-                            <NativeSelect.Field placeholder="Pilih Posisi" value={posisi} onChange={(e) => setPosisi(e.target.value)}>
+                            <NativeSelect.Field placeholder="Pilih Posisi" value={posisiKaryawan} onChange={(e) => setPosisiKaryawan(e.target.value)}>
                                 {posisiOptions.map((item, index) => (
                                     <option key={index} value={item.value}>{item.label}</option>
                                 ))}
@@ -109,11 +106,11 @@ const PerangkatUpdate = () => {
                             borderRadius="10px"
                             onClick={() => handleUpdate()}
                         >
-                            <Text>Update Perangkat</Text>
+                            <Text>Update Karyawan</Text>
                         </Button>
                         <Button
                             as={Link}
-                            to="/dashboard/perangkat"
+                            to="/dashboard/karyawan"
                             borderRadius="10px"
                             variant="outline"
                         >
@@ -126,4 +123,4 @@ const PerangkatUpdate = () => {
     );
 }
 
-export default PerangkatUpdate;
+export default KaryawanUpdate;
